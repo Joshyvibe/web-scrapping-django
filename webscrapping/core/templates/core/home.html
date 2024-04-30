@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scrapping</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e7e0e0;
+            box-sizing: border-box;
+        }
+
+        #main {
+            text-align: center;
+            padding-top: 100px;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: rgb(159, 70, 10);
+            text-align: center;
+        }
+        input[type='text'] {
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding: 10px;
+            height: 50px;
+            width: 850px;
+            outline: rgb(144, 73, 25);
+            border: 2px solid rgb(159, 70, 10);;
+        }
+        input[type='submit'] {
+            width: 30%;
+            border-radius: 5px;
+            background-color: rgb(159, 70, 10);
+            color: white;
+            padding: 5px;
+            border: 2px solid rgb(159, 70, 10);
+            text-transform: uppercase;
+        }
+        input[type='submit']:hover {
+            background-color: rgb(122, 60, 19);
+
+        }
+        form {
+            margin-top: 30px;
+        }
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        .product-table th, .product-table td {
+            border: 1px solid #4f2525;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .product-table th {
+            background-color: #fbd2d2;
+        }
+
+        .product-table img {
+            max-width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h1>Search For Jumia Products</h1>
+        <form method="GET">
+            <div>
+                <label for="product"></label>
+                <input type="text" id="product" value="{{request.GET.product}}" placeholder="Search for product" name="product">
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+       {% if product_info_list %}
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product_info in product_info_list %}
+                <tr>
+                    <td>{{product_info.name}}</td>
+                    <td>{{product_info.price}}</td>
+                    <td><img src="{{product_info.image_url}}" alt="{{product_info.name}} Image"></td>
+                    <td>{{product_info.rating}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    
+       
+    
+    </div>
+</body>
+</html>
